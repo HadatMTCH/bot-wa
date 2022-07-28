@@ -1,4 +1,3 @@
-const config = require('../config.json')
 const dotenv = require('dotenv')
 const path = require('path')
 dotenv.config()
@@ -6,15 +5,15 @@ dotenv.config()
 module.exports = {
     rootPath: path.resolve(__dirname, '..'), // Ignore this
 
-    botName: process.env.BOT_NAME || config.botName,
+    botName: process.env.BOT_NAME,
 
-    limit: process.env.LIMIT || config.limit,
-    timezone: process.env.TIMEZONE || config.timezone,
+    limit: process.env.LIMIT,
+    timezone: process.env.TIMEZONE,
 
-    ownerName: process.env.OWNER_NAME || config.ownerName,
-    ownerNumber: process.env.OWNER_NUMBER?.split(',') || config.ownerNumber,
+    ownerName: process.env.OWNER_NAME,
+    ownerNumber: process.env.OWNER_NUMBER,
 
-    sessionName: process.env.SESSION_NAME || config.sessionName,
+    sessionName: process.env.SESSION_NAME,
 
-    apikey: process.env.APIKEY || config.apikey,
+    apikey: process.env.APIKEY,
 }
