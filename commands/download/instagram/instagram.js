@@ -17,7 +17,8 @@ module.exports = {
             const result = await lolhuman.instagram(args[0])
             return msg.replyVideo({ url: result })
         } catch (error) {
-            console.log("Error in tiktok video downloader: ",error)
+            console.log("Error in instagram video downloader: ", error)
+            return msg.reply("Please make sure the url is correct / public");
         }
     },
 }
