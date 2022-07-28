@@ -45,6 +45,7 @@ class MessageCollector extends EventEmitter {
         this.on('end', () => {
             clearTimeout(this._timeout)
             this._timeout = null
+            this.removeListener('collect', this.messageHandler);
         })
     }
 
