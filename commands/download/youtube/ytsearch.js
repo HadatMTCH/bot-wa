@@ -15,8 +15,9 @@ module.exports = {
     expectedArgs: '<query>',
     example: '{prefix}{command} melukis senja',
     callback: async ({ msg, client, fullArgs }) => {
-        youtube.search(fullArgs, { type: 'video' }).then((res) => {
-            const result = res.map((v) => {
+        try {
+            let response = await youtube.search(fullArgs, { type: 'video' });
+            const result = response.map((v) => {
                 return {
                     id: v.id,
                     title: v['title'],
@@ -34,6 +35,8 @@ module.exports = {
                 .join('\n\n=====================\n')
             text += '```'
             return client.sendMessage(msg.from, { image: { url: result[0].thumbnail }, caption: text })
-        })
+        } catch (error) {
+            console.log("Error in youtube search: ", error)
+        }
     },
 }

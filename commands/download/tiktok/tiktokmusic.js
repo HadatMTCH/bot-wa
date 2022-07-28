@@ -13,7 +13,11 @@ module.exports = {
     expectedArgs: '<link>',
     example: '{prefix}{command} https://vt.tiktok.com/ZSwWCk5o/',
     callback: async ({ msg, args }) => {
-        const result = await lolhuman.tiktokMusic(args[0])
-        return msg.replyAudio(result)
+        try {
+            const result = await lolhuman.tiktokMusic(args[0])
+            return msg.replyAudio(result)
+        } catch (error) {
+            console.log("Error in tiktok music downloader: ", error)
+        }
     },
 }

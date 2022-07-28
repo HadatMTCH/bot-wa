@@ -13,8 +13,13 @@ module.exports = {
     expectedArgs: '<link>',
     example: '{prefix}{command} https://www.youtube.com/watch?v=eZskFo64rs8',
     callback: async ({ msg, args }) => {
-        const result = await youtube(args[0], 'mp3')
-        await msg.replyImage({ url: result.thumbnail }, `${result.title} - ${result.size}`)
-        await msg.replyAudio({ url: result.link })
+        try {
+            const result = await youtube(args[0], 'mp3')
+            await msg.replyImage({ url: result.thumbnail }, `${result.title} - ${result.size}`)
+            await msg.replyAudio({ url: result.link })
+            return
+        } catch (error) {
+            console.log("Error in youtube audio downloader: ", error)
+        }
     },
 }

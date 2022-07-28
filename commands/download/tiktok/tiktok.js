@@ -13,7 +13,11 @@ module.exports = {
     expectedArgs: '<link>',
     example: '{prefix}{command} https://vt.tiktok.com/ZSwWCk5o/',
     callback: async ({ msg, args }) => {
-        const result = await lolhuman.tiktokNoWM3(args[0])
-        return msg.replyVideo({ url: result })
+        try {
+            const result = await lolhuman.tiktokNoWM3(args[0])
+            return msg.replyVideo({ url: result })
+        } catch (error) {
+            console.log("Error in tiktok video downloader: ",error)
+        }
     },
 }
