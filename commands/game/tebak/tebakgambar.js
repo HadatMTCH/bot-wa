@@ -1,5 +1,6 @@
 const { ICommand } = require('@libs/builders/command/command.builder')
 const config = require('@config')
+const { generateRandomXP } = require('@libs/constants/number')
 const axios = require('axios').default
 
 const _collection = new Map()
@@ -12,6 +13,7 @@ module.exports = {
     description: 'Game tebak gambar, guest and get exp.',
     callback: async ({ msg, database }) => {
         try {
+            const gainedXP = generateRandomXP();
             if (_collection.get(msg.from)) {
                 return msg.reply('Please complete last game first.', _collection.get(msg.from))
             }
@@ -21,21 +23,23 @@ module.exports = {
 
             _collection.set(msg.from, question)
 
-            msg.createMessageCollector({
+            const collector = msg.createMessageCollector({
                 filter: data.result.answer,
                 max: 1,
-            })
-                .on('collect', (msg) => {
-                    let xp = Math.floor(Math.random() * (999 - 1) + 1)
-                    database.users.addExp(msg, msg.senderNumber, xp)
-                    msg.reply('Right! You received {xp} XP!'.format({ xp }))
-                })
-                .on('end', (res) => {
-                    _collection.delete(msg.from)
-                    if (res == 'timeout') {
-                        msg.reply(`Timeout, answer is : ${data.result.answer}`, question)
-                    }
-                })
+            });
+
+            collector.on('collect', (msg) => {
+                database.users.addExp(msg, msg.senderNumber, gainedXP)
+                msg.reply('Right! You received {xp} XP!'.format({ gainedXP }))
+            });
+
+            collector.on('end', (res) => {
+                _collection.delete(msg.from)
+                if (res == 'timeout') {
+                    msg.reply(`Timeout, answer is : ${data.result.answer}`, question)
+                }
+            });
+            
         } catch (error) {
             console.log("Error in tebak gambar: ", error)
         }
