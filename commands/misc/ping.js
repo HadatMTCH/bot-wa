@@ -5,6 +5,7 @@ const moment = require('moment-timezone')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 5 * 1000,
     aliases: ['p'],
     category: 'misc',
     description: 'Test bot response.',
