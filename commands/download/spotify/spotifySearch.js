@@ -17,13 +17,13 @@ module.exports = {
     callback: async ({ msg, args }) => {
         try {
             const result = await lolhuman.spotifySearch(args.join(' '));
-            console.log(result);
-            var sections = []
-            sections.push({
-                title: "Search result of " + args.join(' '),
-                rows: [
-                ],
-            })
+            var sections = [
+                {
+                    title: "Search result of " + args.join(' '),
+                    rows: [
+                    ],
+                }
+            ]
             result.forEach((value, index) => {
                 sections[0].rows.push({
                     title: value.artists + " - " + value.title,
