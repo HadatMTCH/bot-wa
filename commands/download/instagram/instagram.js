@@ -5,6 +5,7 @@ const { lolhuman } = require('@libs/constants/api/api.constant')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 10000,
     aliases: ['igdl', 'ig'],
     category: 'instagram',
     description: 'Instagram Downloader',

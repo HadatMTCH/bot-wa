@@ -5,6 +5,7 @@ const moment = require('moment-timezone')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 10000,
     category: 'owner',
     description: 'Join group by link.',
     ownerOnly: true,

@@ -8,6 +8,7 @@ const config = require('@config')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 2000,
     aliases: ['menu'],
     callback: async ({ msg, client, args, prefix }) => {
         if (args.length > 0) {

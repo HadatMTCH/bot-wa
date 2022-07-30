@@ -4,6 +4,7 @@ const { ICommand } = require('@libs/builders/command/command.builder')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 10000,
     category: 'about',
     description: 'Show your stats.',
     callback: async ({ msg, database }) => {

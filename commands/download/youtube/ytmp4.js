@@ -5,6 +5,7 @@ const { ICommand } = require('@libs/builders/command/command.builder')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 10000,
     aliases: ['ytv', 'ytvideo'],
     category: 'youtube',
     description: 'Youtube video downloader.',

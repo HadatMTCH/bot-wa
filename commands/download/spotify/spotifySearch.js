@@ -7,6 +7,7 @@ const config = require('@config')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 10000,
     aliases: ['spotsearch', 'spots'],
     category: 'spotify',
     description: 'Spotify Search',

@@ -9,7 +9,7 @@ const _collection = new Map()
  * @type { ICommand }
  */
 module.exports = {
-    cooldown: 10 * 1000,
+    cooldown: 20000,
     category: 'game',
     description: 'Game tebak lirik, jawab lirik yg kosong dan dapatkan XP!',
     callback: async ({ msg, database }) => {

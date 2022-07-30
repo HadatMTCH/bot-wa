@@ -5,6 +5,7 @@ const config = require('@config')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 10000,
     category: 'about',
     description: 'Show owner this bot.',
     callback: async ({ msg, client }) => {

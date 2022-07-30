@@ -10,6 +10,7 @@ const sticker = axios.create({
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 0,
     aliases: ['s'],
     category: 'maker',
     subCategory: 'sticker',

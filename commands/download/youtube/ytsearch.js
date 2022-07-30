@@ -7,6 +7,7 @@ const youtube = new Client()
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 10000,
     aliases: ['yts'],
     category: 'youtube',
     description: 'Youtube search.',

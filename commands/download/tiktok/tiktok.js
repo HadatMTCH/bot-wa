@@ -5,6 +5,7 @@ const { lolhuman } = require('@libs/constants/api/api.constant')
  * @type { ICommand }
  */
 module.exports = {
+    cooldown: 10000,
     aliases: ['tt', 'ttdl'],
     category: 'tiktok',
     description: 'Tiktok Downloader',
