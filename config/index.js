@@ -16,5 +16,6 @@ module.exports = {
     sessionName: process.env.SESSION_NAME,
 
     apikey: process.env.APIKEY,
-    baseURL: process.env.API_BASE_URL
+    baseURL: process.env.API_BASE_URL,
+    fetchVersionWithProxy: process.env.FETCH_VERSION_WITH_PROXY,
 }
