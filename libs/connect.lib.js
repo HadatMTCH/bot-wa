@@ -8,7 +8,7 @@ const { existsSync } = require('fs')
 const store = require('@store')
 const chalk = require('chalk')
 const Pino = require('pino')
-
+const config = require("@config")
 existsSync('./store/baileys_store.json') && store.readFromFile('./store/baileys_store.json')
 setInterval(() => {
     store.writeToFile('./store/baileys_store.json')
@@ -18,7 +18,7 @@ const utility = new Utility()
 
 const connect = async () => {
     const { state, saveCreds } = await useMultiFileAuthState(`./session/${sessionName}-session`)
-    const { version, isLatest } = await fetchLatestBaileysVersion()
+    const { version, isLatest } = config.fetchVersionWithProxy ? await utility.fetchLatestBaileysVersion() : await fetchLatestBaileysVersion()
 
     const client = WASocket({
         printQRInTerminal: true,

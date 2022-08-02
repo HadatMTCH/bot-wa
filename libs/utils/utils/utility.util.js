@@ -6,11 +6,34 @@ const cron = require('node-cron')
 const rimraf = require('rimraf')
 const path = require('path')
 const config = require('@config')
+const { default: axios } = require('axios')
 
 class Utility {
     constructor() {
         Promise.all([this.deleteSession(), this.registerCommand(), this.initCronJob()])
     }
+
+    /**
+     * utility that fetches latest baileys version from the master branch.
+     * Use to ensure your WA connection is always on the latest version
+     */
+    async fetchLatestBaileysVersion() {
+        const URL = 'https://ghproxy.com/https://raw.githubusercontent.com/adiwajshing/Baileys/master/src/Defaults/baileys-version.json';
+        try {
+            const result = await axios.get(URL, { responseType: 'json' });
+            return {
+                version: result.data.version,
+                isLatest: true
+            };
+        }
+        catch (error) {
+            return {
+                version: [2, 2224, 8],
+                isLatest: false,
+                error
+            };
+        }
+    };
 
     getAllFiles(directory) {
         const pathFiles = new GlobSync(path.join(directory, '**', '*.js').replace(/\\/g, '/')).found
@@ -34,12 +57,12 @@ class Utility {
     }
 
     initCronJob() {
-        cron.schedule('0 0 * * *', async () => {})
+        cron.schedule('0 0 * * *', async () => { })
         logger.stats('CronJob init')
     }
 
     registerCommand() {
-        const files = this.getAllFiles(path.join(__dirname, '..', '..', '..', 'commands'))
+        const files = this.getAllFiles(path.join(process.cwd(), 'commands'))
         for (let { basename, file } of files) {
             if (commands.get(basename)) {
                 continue
