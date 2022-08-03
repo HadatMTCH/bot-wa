@@ -11,7 +11,7 @@ const _collection = new Map()
 module.exports = {
     cooldown: 20000,
     category: 'game',
-    description: 'Game tebak lirik, jawab lirik yg kosong dan dapatkan XP!',
+    description: '⛔️Perhatian Bukan Teka Teki Biasa, Tapi TEKA TEKI SULIT⛔️\nBuktikan kalau anda memang cerdas dan penuh daya imajinasi.',
     callback: async ({ msg, database }) => {
         try {
             const gainedXP = generateRandomXP();
@@ -19,9 +19,9 @@ module.exports = {
                 return msg.reply('Please complete last game first.', _collection.get(msg.from))
             }
 
-            const { data } = await axios.get(`${config.baseURL}tebak/lirik?apikey={apikey}`.format({ apikey: config.apikey }))
+            const { data } = await axios.get(`${config.baseURL}tebak/caklontong?apikey={apikey}`.format({ apikey: config.apikey }))
             const { result } = data;
-            let message = `*${result.question}*\n\nLanjutkan lirik lagu tersebut!\nWaktu kalian 1 menit!`
+            let message = `*${result.question} ?*\n\nJawab pertanyaan tersebut!\nWaktu kalian 1 menit!`
             let question = await msg.reply(message);
             _collection.set(msg.from, question)
             
@@ -42,7 +42,7 @@ module.exports = {
                 }
             });
         } catch (error) {
-            console.log("Error in tebak lirik: ", error)
+            console.log("Error in cak lontong: ", error)
         }
     },
 }
